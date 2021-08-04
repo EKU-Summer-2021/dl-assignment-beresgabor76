@@ -11,8 +11,8 @@ def function_minimization():
     Function minimization with automatic differentiation and SGD
     """
     # Initialize a random value for our initial x
-    x = tf.Variable([tf.random.normal([1])])
-    print("Initializing x={}".format(x.numpy()))
+    x_v = tf.Variable([tf.random.normal([1])])
+    print("Initializing x={}".format(x_v.numpy()))
 
     learning_rate = 1e-2 # learning rate for SGD
     history = []
@@ -24,12 +24,12 @@ def function_minimization():
     for _ in range(500):
         with tf.GradientTape() as tape:
             # define the loss as described above
-            loss = tf.pow((x - x_f), 2)
+            loss = tf.pow((x_v - x_f), 2)
         # loss minimization using gradient tape
-        grad = tape.gradient(loss, x) # compute the derivative of the loss with respect to x
-        new_x = x - learning_rate * grad # sgd update
-        x.assign(new_x) # update the value of x
-        history.append(x.numpy()[0])
+        grad = tape.gradient(loss, x_v) # compute the derivative of the loss with respect to x
+        new_x = x_v - learning_rate * grad # sgd update
+        x_v.assign(new_x) # update the value of x
+        history.append(x_v.numpy()[0])
 
     # Plot the evolution of x as we optimize towards x_f!
     plt.plot(history)

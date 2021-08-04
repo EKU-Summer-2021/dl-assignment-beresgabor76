@@ -18,11 +18,11 @@ class IdentityModel(Model):
     def call(self, inputs, training=None, isidentity=False):
         """Implement the behavior where the network outputs the input,
         unchanged, under control of the isidentity argument."""
-        x = self.dense_layer(inputs)
+        x_out = self.dense_layer(inputs)
         #Implement identity behavior
         if isidentity:
             return inputs
-        return x
+        return x_out
 
     def get_config(self):
         """Abstract method overridden"""
