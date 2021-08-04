@@ -18,15 +18,11 @@ class SubclassModel(Model):
                                                  activation='sigmoid',
                                                  use_bias=True,
                                                  kernel_initializer=None,
-                                                 bias_initializer=None,
-                                                 kernel_regularizer=None,
-                                                 bias_regularizer=None,
-                                                 activity_regularizer=None,
-                                                 kernel_constraint=None,
-                                                 bias_constraint=None)
+                                                 bias_initializer=None)
 
     # In the call function, we define the Model's forward pass.
     def call(self, inputs, training=None, mask=None):
+        """Calls dense layer on given inputs"""
         return self.dense_layer(inputs)
 
     def get_config(self):

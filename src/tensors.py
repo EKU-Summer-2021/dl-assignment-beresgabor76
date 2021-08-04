@@ -2,7 +2,6 @@
 Module for basic tensorflow operations
 """
 import tensorflow as tf
-import numpy as np
 
 
 def tensor_2d():
