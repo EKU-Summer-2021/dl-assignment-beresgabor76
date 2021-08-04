@@ -1,23 +1,28 @@
 """
-Defining a model using subclassing and specifying custom behavior ###
+Module for defining a model using subclassing and specifying custom behavior
 """
 from tensorflow.keras import Model
-from tensorflow.keras.layers import Dense
+import tensorflow as tf
 
 
 class IdentityModel(Model):
+    """
+    Defining a model using subclassing and specifying custom behavior
+    """
     # As before, in __init__ we define the Model's layers
     # Since our desired behavior involves the forward pass, this part is unchanged
     def __init__(self, n_output_nodes):
-        super(IdentityModel, self).__init__()
-        self.dense_layer = Dense(n_output_nodes, activation='sigmoid')
+        super().__init__()
+        self.dense_layer = tf.keras.layers.Dense(n_output_nodes, activation='sigmoid')
 
-    '''TODO: Implement the behavior where the network outputs the input, unchanged, 
-        under control of the isidentity argument.'''
     def call(self, inputs, isidentity=False):
+        """Implement the behavior where the network outputs the input,
+        unchanged, under control of the isidentity argument."""
         x = self.dense_layer(inputs)
-        '''TODO: Implement identity behavior'''
+        #Implement identity behavior
         if isidentity:
             return inputs
-        else:
-            return x
+        return x
+
+    def get_config(self):
+        """Abstract method overridden"""
