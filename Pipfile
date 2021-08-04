@@ -9,6 +9,11 @@ coverage = '*'
 
 [packages]
 numpy = '*'
+tensorflow = "2.5"
+matplotlib = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
