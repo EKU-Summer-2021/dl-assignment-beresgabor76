@@ -14,19 +14,19 @@ class OurDenseLayer(tf.keras.layers.Layer):
     def __init__(self, n_output_nodes):
         super().__init__()
         self.n_output_nodes = n_output_nodes
-        self.W = None
-        self.b = None
+        self.weight = None
+        self.bias = None
 
     def build(self, input_shape):
-        d = int(input_shape[-1])
+        dim = int(input_shape[-1])
         # Define and initialize parameters: a weight matrix W and bias b
         # Note that parameter initialization is random!
-        self.W = self.add_weight("weight", shape=[d, self.n_output_nodes]) # note the dimensionality
-        self.b = self.add_weight("bias", shape=[1, self.n_output_nodes]) # note the dimensionality
+        self.weight = self.add_weight("weight", shape=[dim, self.n_output_nodes]) # note the dimensionality
+        self.bias = self.add_weight("bias", shape=[1, self.n_output_nodes]) # note the dimensionality
 
-    def call(self, x):
+    def call(self, x_input):
         # define the operation for z (hint: use tf.matmul)
-        z = tf.add(tf.matmul(x, self.W), self.b)
+        z_out = tf.add(tf.matmul(x_input, self.weight), self.bias)
         # define the operation for out (hint: use tf.sigmoid)
-        y = tf.sigmoid(z)
-        return y
+        y_out = tf.sigmoid(z_out)
+        return y_out

@@ -24,9 +24,9 @@ def tensor_4d():
     return images
 
 
-def func(a, b):
+def func(var_a, var_b):
     """Define the operation for c, d, e (use tf.add, tf.subtract, tf.multiply)."""
-    c = tf.add(a, b)
-    d = tf.subtract(b, 1)
-    e = tf.multiply(c, d)
-    return e
+    var_c = tf.add(var_a, var_b)
+    var_d = tf.subtract(var_b, 1)
+    var_e = tf.multiply(var_c, var_d)
+    return var_e

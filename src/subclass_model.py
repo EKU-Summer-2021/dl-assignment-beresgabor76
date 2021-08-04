@@ -17,8 +17,8 @@ class SubclassModel(Model):
         self.dense_layer = tf.keras.layers.Dense(n_output_nodes,
                                                  activation='sigmoid',
                                                  use_bias=True,
-                                                 kernel_initializer=None,  # 'random ?
-                                                 bias_initializer=None,  # 'random ?
+                                                 kernel_initializer=None,
+                                                 bias_initializer=None,
                                                  kernel_regularizer=None,
                                                  bias_regularizer=None,
                                                  activity_regularizer=None,
@@ -26,7 +26,7 @@ class SubclassModel(Model):
                                                  bias_constraint=None)
 
     # In the call function, we define the Model's forward pass.
-    def call(self, inputs):
+    def call(self, inputs, training=None, mask=None):
         return self.dense_layer(inputs)
 
     def get_config(self):

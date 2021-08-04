@@ -15,7 +15,7 @@ class IdentityModel(Model):
         super().__init__()
         self.dense_layer = tf.keras.layers.Dense(n_output_nodes, activation='sigmoid')
 
-    def call(self, inputs, isidentity=False):
+    def call(self, inputs, training=None, isidentity=False):
         """Implement the behavior where the network outputs the input,
         unchanged, under control of the isidentity argument."""
         x = self.dense_layer(inputs)
