@@ -38,7 +38,8 @@ class Dataset(ABC):
         self.__read_file()
         self._feature_selection()
         self._categories_encoding()
-        self._split_dataset()
+        self.__split_dataset_into_train_test()
+        self._split_dataset_into_x_y()
         self.__feature_scaling()
 
     def __read_file(self):
@@ -88,7 +89,7 @@ class Dataset(ABC):
         self._dataset = pd.concat([self._dataset, df_cat_1hot], axis=1) \
             .drop(column_name, axis=1)
 
-    def _split_dataset(self):
+    def __split_dataset_into_train_test(self):
         """
         Splits dataset to train and test sets
         """
@@ -97,6 +98,12 @@ class Dataset(ABC):
                                                              random_state=self._random_state)
         self.train_set_x.reset_index(inplace=True)
         self.test_set_x.reset_index(inplace=True)
+
+    @abstractmethod
+    def _split_dataset_into_x_y(self):
+        """
+        Implemented in child classes according to x and y feature numbers
+        """
 
     def __feature_scaling(self):
         """

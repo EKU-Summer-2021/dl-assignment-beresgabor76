@@ -44,15 +44,12 @@ class DatasetStudents(Dataset):
         self._category_ordinal_encoder('internet')
         self._category_ordinal_encoder('romantic')
         self._dataset = pd.concat([self._dataset, dataset_y], axis=1)
-        self._category_1hot_encoder('G3')
 
-    def _split_dataset(self):
+    def _split_dataset_into_x_y(self):
         """
-        Splits dataset into train and test sets through calling super class function
-        then splits them into x and y sets according to the feature arrangement
+        Splits dataset  into x and y sets according to the feature arrangement
         """
-        super()._split_dataset()
-        self.train_set_y = self.train_set_x[self.train_set_x.columns[-19:]].copy()
-        self.train_set_x = self.train_set_x.drop(self.train_set_x.columns[-19:], axis=1).copy()
-        self.test_set_y = self.test_set_x[self.test_set_x.columns[-19:]].copy()
-        self.test_set_x = self.test_set_x.drop(self.test_set_x.columns[-19:], axis=1).copy()
+        self.train_set_y = self.train_set_x[self.train_set_x.columns[-1]].copy()
+        self.train_set_x = self.train_set_x.drop(self.train_set_x.columns[-1], axis=1).copy()
+        self.test_set_y = self.test_set_x[self.test_set_x.columns[-1]].copy()
+        self.test_set_x = self.test_set_x.drop(self.test_set_x.columns[-1], axis=1).copy()
