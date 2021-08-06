@@ -19,6 +19,14 @@ class DatasetStudents(Dataset):
         """
         self._dataset.drop('G1', axis=1, inplace=True)
         self._dataset.drop('G2', axis=1, inplace=True)
+        corr_matrix = self._dataset.corr()
+        columns = corr_matrix['G3']
+        columns = columns[abs(columns.values) < 0.1]
+        for column_name in columns.index:
+            try:
+                self._dataset.drop(column_name, axis=1, inplace=True)
+            except:
+                pass
 
     def _categories_encoding(self):
         """

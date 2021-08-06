@@ -35,8 +35,8 @@ class Dataset(ABC):
         Prepares dataset for machine learning process
         """
         self.__read_file()
-        self._feature_selection()
         self._categories_encoding()
+        self._feature_selection()
         self.__split_dataset_into_train_test()
         self._split_dataset_into_x_y()
         self.__feature_scaling()
