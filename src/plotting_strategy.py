@@ -12,7 +12,7 @@ class PlottingStrategy(ABC):
     """
     Results plotting strategy abstract class
     """
-    def plot_history(self, history, save_dir):
+    def plot_learning_curve(self, history, save_dir):
         """
         Saves plot of DNN's learning curve to png file
         """

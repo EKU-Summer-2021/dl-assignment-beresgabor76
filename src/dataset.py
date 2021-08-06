@@ -9,15 +9,15 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-
+#from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 class Dataset(ABC):
     """
     Abstract class implementing template pattern for storing and preparing data
     for deep learning
     """
-
     def __init__(self, filenames, test_size=0.2, random_state=20):
         super().__init__()
         self._filenames = filenames
@@ -28,8 +28,8 @@ class Dataset(ABC):
         self.train_set_y = None
         self.test_set_x = None
         self.test_set_y = None
-        self.x_scaler = MinMaxScaler(feature_range=(0, 1), copy=True)
-        self.y_scaler = MinMaxScaler(feature_range=(0, 1), copy=True)
+        self.x_scaler = StandardScaler()#MinMaxScaler(feature_range=(0, 1), copy=True)
+        self.y_scaler = StandardScaler()#MinMaxScaler(feature_range=(0, 1), copy=True)
 
     def prepare(self):
         """
@@ -41,6 +41,7 @@ class Dataset(ABC):
         self.__split_dataset_into_train_test()
         self._split_dataset_into_x_y()
         self.__feature_scaling()
+        self.__dimensionality_reduction()
 
     def __read_file(self):
         """
@@ -119,3 +120,12 @@ class Dataset(ABC):
         self.test_set_x = pd.DataFrame(scaled_arr, columns=self.test_set_x.columns)
         # scaled_arr = self.y_scaler.transform(np.array([self.test_set_y]).reshape(-1, 1))
         # self.test_set_y = pd.DataFrame(scaled_arr)
+
+    def __dimensionality_reduction(self):
+        """
+        Reduces X dimensions with PCA
+
+        pca = PCA(n_components=0.75)
+        self.train_set_x = pd.DataFrame(pca.fit_transform(self.train_set_x))
+        self.test_set_x = pd.DataFrame(pca.transform(self.test_set_x))
+        """
