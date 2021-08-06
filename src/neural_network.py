@@ -113,7 +113,11 @@ class NeuralNetwork:
         self.__test_set_y = test_set_y
         results = self.__dnn.evaluate(x=test_set_x, y=test_set_y)
         self.__logger.info('test loss, test accuracy: %s', str(np.round(results, 2)))
-        self.__prediction = pd.Series(self.__dnn.predict_classes(x=test_set_x), name='Prediction')
+        proba_mx = self.__dnn.predict(x=test_set_x)
+        classes = []
+        for probas in proba_mx:
+            classes.append(np.argmax(probas))
+        self.__prediction = pd.Series(classes, name='Prediction')
 
     def plot_test_results(self):
         """
