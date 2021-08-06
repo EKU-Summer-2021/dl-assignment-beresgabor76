@@ -6,7 +6,6 @@ from src import SavingStrategy4SL
 if __name__ == '__main__':
    dataset = DatasetStudents()
    dataset.prepare()
-   print(dataset.train_set_x.head())
    dnn = NeuralNetwork(input_number=dataset.train_set_x.shape[1],
                        layer_sizes=[100, 50, 21],
                        activation_functions=['relu', 'softmax'],
